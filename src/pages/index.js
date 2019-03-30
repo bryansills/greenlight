@@ -1,3 +1,11 @@
 import React from "react"
+import { Header } from "../components/Header"
 
-export default () => <div>Hello React!</div>
+export default () => {
+    return (
+        <div style={{ color: `teal` }}>
+            <Header />
+            <p>Such wow. Very React.</p>
+        </div>
+    )
+}
