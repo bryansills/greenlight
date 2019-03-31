@@ -1,18 +1,21 @@
 import React from "react"
-import { Map, TileLayer, Marker, Popup } from "react-leaflet"
+import { Map, TileLayer } from "react-leaflet"
+import HeatmapLayer from "react-leaflet-heatmap-layer"
+import data from "../data/all.json"
 
 export class BikeMap extends React.Component {
     constructor() {
         super()
         this.state = {
-            lat: 51.505,
-            lng: -0.09,
-            zoom: 13
+            lat: 41.881832,
+            lng: -87.623177,
+            zoom: 11
         }
     }
 
     render() {
         const position = [this.state.lat, this.state.lng]
+        const points = data
 
         if (typeof window !== 'undefined') {
             return (
@@ -21,11 +24,12 @@ export class BikeMap extends React.Component {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
                     />
-                    <Marker position={position}>
-                        <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
-                    </Marker>
+                    <HeatmapLayer
+                        points={points}
+                        longitudeExtractor={m => m[1]}
+                        latitudeExtractor={m => m[0]}
+                        intensityExtractor={m => parseFloat(m[2])}
+                  />
                 </Map>
             )
         } else {
