@@ -1,0 +1,32 @@
+{
+    "COMPANY": {
+        "KEY": "company",
+        "DATA": "Company Vehicle",
+        "SPINNER": "Company Vehicle"
+    },
+    "TAXI_RIDESHARE": {
+        "KEY": "taxi_rideshare",
+        "DATA": "Taxi / Uber / Livery / Lyft",
+        "SPINNER": "Taxi / Uber / Lyft / Livery"
+    },
+    "PRIVATE_OWNER": {
+        "KEY": "private_owner",
+        "DATA": "Private Owner Vehicle",
+        "SPINNER": "Private Owner Vehicle"
+    },
+    "MUNICIPAL_VEHICLE": {
+        "KEY": "municipal",
+        "DATA": "Municipal (city) Vehicle - includes USPS",
+        "SPINNER": "Municipal Vehicle"
+    },
+    "CONSTRUCTION": {
+        "KEY": "construction",
+        "DATA": "Construction",
+        "SPINNER": "Construction"
+    },
+    "OTHER": {
+        "KEY": "other",
+        "DATA": "\"\"\"Other  (damaged lane, snow, debris, pedestrian, etc.)\"\"\"",
+        "SPINNER": "Other"
+    }
+}

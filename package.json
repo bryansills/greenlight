@@ -5,13 +5,15 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop --https",
+    "build": "yarn run process input/data.csv && gatsby build",
+    "develop": "yarn run process input/data.csv && gatsby develop --https",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "yarn run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
+    "deploy": "yarn run clean && yarn run build --prefix-paths && gh-pages -d public",
+    "process": "node scripts/parsing.js",
+    "clean": "rm -rf ./public/*"
   },
   "dependencies": {
     "gatsby": "^2.3.3",
