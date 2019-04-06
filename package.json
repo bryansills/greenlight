@@ -3,7 +3,6 @@
   "private": true,
   "description": "A simplified bare-bones starter for Gatsby",
   "version": "0.1.0",
-  "license": "MIT",
   "scripts": {
     "build": "yarn run process input/data.csv && gatsby build",
     "develop": "yarn run process input/data.csv && gatsby develop --https",
@@ -13,7 +12,7 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
     "deploy": "yarn run clean && yarn run build --prefix-paths && gh-pages -d public",
     "process": "node scripts/parsing.js",
-    "clean": "rm -rf ./public/*"
+    "clean": "rm -rf ./public/* && rm -rf ./static/json"
   },
   "dependencies": {
     "gatsby": "^2.3.3",
