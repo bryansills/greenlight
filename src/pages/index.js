@@ -1,10 +1,11 @@
 import React from "react"
-import { BikeMap } from "../components/BikeMap"
+import { HeatMap } from "../components/HeatMap"
+import points from "../data/all.json"
 
 export default () => {
     return (
         <div id={"map"}>
-            <BikeMap />
+            <HeatMap position={[41.881832, -87.623177]} zoom={11} points={points} />
         </div>
     )
 }

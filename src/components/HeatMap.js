@@ -1,36 +1,26 @@
 import React from "react"
-import { Map, TileLayer } from "react-leaflet"
+import { TileLayer } from "react-leaflet"
 import HeatmapLayer from "react-leaflet-heatmap-layer"
-import data from "../data/all.json"
+import { FullScreenMap } from "./FullScreenMap"
 
-export class BikeMap extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            lat: 41.881832,
-            lng: -87.623177,
-            zoom: 11
-        }
-    }
-
+export class HeatMap extends React.Component {
     render() {
-        const position = [this.state.lat, this.state.lng]
-        const points = data
+        const { position, zoom, points } = this.props
 
         if (typeof window !== 'undefined') {
             return (
-                <Map center={position} zoom={this.state.zoom} style={{ minHeight: 200 }}>
+                <FullScreenMap center={position} zoom={zoom}>
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
                     />
                     <HeatmapLayer
                         points={points}
-                        longitudeExtractor={m => m[1]}
                         latitudeExtractor={m => m[0]}
+                        longitudeExtractor={m => m[1]}
                         intensityExtractor={m => parseFloat(m[2])}
                   />
-                </Map>
+                </FullScreenMap>
             )
         } else {
             return null
