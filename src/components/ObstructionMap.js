@@ -1,10 +1,18 @@
 import React from "react"
+import axios from "axios"
 import { HeatMap } from "../components/HeatMap"
-import points from "../data/all.json"
 
 export class ObstructionMap extends React.Component {
-    state = {
-        points: points
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            points: []
+        }
+
+        axios.get("json/all/all.json")
+            .then(res => this.setState({ points: res.data }))
+            .catch(error => console.log({ error }))
     }
 
     render() {
