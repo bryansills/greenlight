@@ -1,32 +1,36 @@
-{
-    "COMPANY": {
-        "KEY": "company",
-        "DATA": "Company Vehicle",
-        "SPINNER": "Company Vehicle"
+[
+    {
+        "key": "all",
+        "spinner": "All"
     },
-    "TAXI_RIDESHARE": {
-        "KEY": "taxi_rideshare",
-        "DATA": "Taxi / Uber / Livery / Lyft",
-        "SPINNER": "Taxi / Uber / Lyft / Livery"
+    {
+        "key": "company",
+        "data": "Company Vehicle",
+        "spinner": "Company Vehicle"
     },
-    "PRIVATE_OWNER": {
-        "KEY": "private_owner",
-        "DATA": "Private Owner Vehicle",
-        "SPINNER": "Private Owner Vehicle"
+    {
+        "key": "taxi_rideshare",
+        "data": "Taxi / Uber / Livery / Lyft",
+        "spinner": "Taxi / Uber / Lyft / Livery"
     },
-    "MUNICIPAL_VEHICLE": {
-        "KEY": "municipal",
-        "DATA": "Municipal (city) Vehicle - includes USPS",
-        "SPINNER": "Municipal Vehicle"
+    {
+        "key": "private_owner",
+        "data": "Private Owner Vehicle",
+        "spinner": "Private Owner Vehicle"
     },
-    "CONSTRUCTION": {
-        "KEY": "construction",
-        "DATA": "Construction",
-        "SPINNER": "Construction"
+    {
+        "key": "municipal",
+        "data": "Municipal (city) Vehicle - includes USPS",
+        "spinner": "Municipal Vehicle"
     },
-    "OTHER": {
-        "KEY": "other",
-        "DATA": "\"\"\"Other  (damaged lane, snow, debris, pedestrian, etc.)\"\"\"",
-        "SPINNER": "Other"
+    {
+        "key": "construction",
+        "data": "Construction",
+        "spinner": "Construction"
+    },
+    {
+        "key": "other",
+        "data": "\"\"\"Other  (damaged lane, snow, debris, pedestrian, etc.)\"\"\"",
+        "spinner": "Other"
     }
-}
+]

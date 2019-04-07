@@ -1,3 +1,13 @@
 html, body {
     margin: 0;
 }
+
+#spinner_container {
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    right: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    z-index: 100000;
+}

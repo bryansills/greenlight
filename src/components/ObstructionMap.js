@@ -1,13 +1,16 @@
 import React from "react"
 import axios from "axios"
 import { HeatMap } from "../components/HeatMap"
+import { Dropdown } from "./Dropdown"
+import options from "../data/obstructions"
 
 export class ObstructionMap extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            points: []
+            points: [],
+            selectedOption: options[0].key
         }
 
         axios.get("json/all/all.json")
@@ -15,12 +18,17 @@ export class ObstructionMap extends React.Component {
             .catch(error => console.log({ error }))
     }
 
+    _onChangeObstruction = (key) => this.setState({ selectedOption: key })
+
     render() {
         const { position, zoom } = this.props
-        const { points } = this.state
+        const { points, selectedOption } = this.state
 
         return(
-            <HeatMap position={position} zoom={zoom} points={points} />
+            <div>
+                <HeatMap position={position} zoom={zoom} points={points} />
+                <Dropdown options={options} selectedOption={selectedOption} onChange={this._onChangeObstruction} />
+            </div>
         )
     }
 }
