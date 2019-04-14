@@ -65,15 +65,19 @@ const groupPoints = (points) => {
 }
 
 const outputFiles = (folderName, points) => {
-    const directory = path.resolve(".", `static/json/${folderName}`)
+    const directory = path.resolve(".", `src/data/${folderName}`)
     !fs.existsSync(directory) && fs.mkdirSync(directory, { recursive: true })
 
     OBSTRUCTIONS.map(obstruct => {
         const filteredObstruct = points.filter(([ , , obstruction ]) => obstruction === obstruct.data || !obstruct.data)
         const filteredGroupedObstruct = groupPoints(filteredObstruct)
 
-        fs.writeFileSync(path.resolve(".", `static/json/${folderName}/${obstruct.key}.json`), JSON.stringify(filteredGroupedObstruct, null, 4))
+        fs.writeFileSync(path.resolve(".", `src/data/${folderName}/${obstruct.key}.json`), formatOutput(filteredGroupedObstruct))
     })
+}
+
+const formatOutput = (output) => {
+    return JSON.stringify({ result: output }, null, 4)
 }
 
 // main
