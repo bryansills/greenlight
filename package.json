@@ -5,19 +5,20 @@
   "version": "0.1.0",
   "scripts": {
     "build": "yarn run process input/data.csv && gatsby build",
-    "develop": "yarn run process input/data.csv && gatsby develop --https",
+    "develop": "yarn run clean && yarn run process input/data.csv && gatsby develop --https",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "yarn run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
     "deploy": "yarn run clean && yarn run build --prefix-paths && gh-pages -d public",
     "process": "node scripts/parsing.js",
-    "clean": "rm -rf ./public/* && rm -rf ./static/json"
+    "clean": "rm -rf ./public/* && rm -rf ./.cache && rm -rf ./static/json"
   },
   "dependencies": {
-    "axios": "^0.18.0",
     "gatsby": "^2.3.3",
     "gatsby-plugin-react-leaflet": "^2.0.4",
+    "gatsby-source-filesystem": "^2.0.29",
+    "gatsby-transformer-json": "^2.1.11",
     "leaflet": "^1.4.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

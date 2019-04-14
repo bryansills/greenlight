@@ -1,6 +1,10 @@
 import React from "react"
 
 export class Dropdown extends React.Component {
+    static defaultProps = {
+        options: []
+    }
+
     _onChange = (event) => {
         this.props.onChange(event.target.value)
     }
