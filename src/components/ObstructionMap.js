@@ -14,8 +14,9 @@ export class ObstructionMap extends React.Component {
     _onChangeObstruction = (key) => this.setState({ selectedOption: key })
 
     render() {
-        const { position, zoom, options, points } = this.props
+        const { position, zoom, options, getGroupedPoints } = this.props
         const { selectedOption } = this.state
+        const points = getGroupedPoints(selectedOption)
 
         return(
             <div>

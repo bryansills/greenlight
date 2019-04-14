@@ -1,8 +1,8 @@
 // These are some tools to parse the .CSV files into something that the mapping tools can use
 const fs = require("fs")
 const path = require("path")
-const cities = require("../cities")
-const OBSTRUCTIONS = require("../src/data/obstructions")
+const cities = require("../data/cities")
+const obstructions = require("../data/obstructions")
 
 const processText = (text) => {
     const lines = text.split("\n")
@@ -25,15 +25,15 @@ const processText = (text) => {
             }, [])
 
             if (parts.length === 33) {
-                const obstruction = parts[2]
+                const obstruction = getObstructionKey(parts[2])
                 const lat = parseFloat(parts[3].replace("\"", "").trim())
                 const long = parseFloat(parts[4].replace("\"", "").trim())
 
-                return [
+                return {
                     lat,
                     long,
                     obstruction,
-                ]
+                }
             } else if (line) {
                 console.log(`Unexpected data on line ${index + 1}: has ${parts.length} sections instead of 33`)
                 console.log(line)
@@ -44,36 +44,15 @@ const processText = (text) => {
         .filter(Boolean)
 }
 
-const groupPoints = (points) => {
-    const groupedMap = points.reduce((acc, [lat, long]) => {
-        const key = `${lat},${long}`
-        const value = acc[key]
-        const count = value && value.count || 0
-        return {
-            ...acc,
-            [key]: {
-                lat,
-                long,
-                count: count + 1
-            }
-        }
-    }, {})
-
-    return Object.values(groupedMap)
-        .sort((left, right) => right.count - left.count)
-        .map(({ lat, long, count }) => [lat, long, count])
+const getObstructionKey = (csvName) => {
+    const match = obstructions.find(obstruction => obstruction.data === csvName)
+    return match ? match.key : "other"
 }
 
 const outputFiles = (cityName, points) => {
     const directory = path.resolve(".", "points/")
     !fs.existsSync(directory) && fs.mkdirSync(directory, { recursive: true })
-
-    OBSTRUCTIONS.map(obstruct => {
-        const filteredObstruct = points.filter(([ , , obstruction ]) => obstruction === obstruct.data || !obstruct.data)
-        const filteredGroupedObstruct = groupPoints(filteredObstruct)
-
-        fs.writeFileSync(path.resolve(".", `points/${cityName}-${obstruct.key}.json`), formatOutput(filteredGroupedObstruct))
-    })
+    fs.writeFileSync(path.resolve(".", `points/${cityName}.json`), formatOutput(points))
 }
 
 const formatOutput = (output) => {
@@ -86,13 +65,16 @@ const inputFilename = process.argv[2]
 const input = fs.readFileSync(path.resolve(".", inputFilename)).toString()
 const processedText = processText(input)
 
-outputFiles("all", processedText)
-
-Object.keys(cities).map(city => {
-    const { min_lat, max_lat, min_long, max_long } = cities[city]
-    const filtered = processedText.filter(([lat, long]) => {
-        return min_lat < lat && lat < max_lat && min_long < long && long < max_long
+cities.map(city => {
+    const { key, bounds } = city
+    const filtered = processedText.filter(({lat, long}) => {
+        if (bounds) {
+            const { min_lat, max_lat, min_long, max_long } = bounds
+            return min_lat < lat && lat < max_lat && min_long < long && long < max_long
+        } else {
+            return true
+        }
     })
 
-    outputFiles(city, filtered)
+    outputFiles(key, filtered)
 })
