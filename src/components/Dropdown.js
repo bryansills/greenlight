@@ -1,4 +1,5 @@
 import React from "react"
+import dropdownStyles from "./dropdown.module.css"
 
 export class Dropdown extends React.Component {
     static defaultProps = {
@@ -21,7 +22,7 @@ export class Dropdown extends React.Component {
         const { selectedOption } = this.props
 
         return(
-            <div id="spinner_container">
+            <div className={dropdownStyles.spinner_container}>
                 <select value={selectedOption} onChange={this._onChange}>
                     { this._renderOptions() }
                 </select>

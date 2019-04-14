@@ -2,30 +2,41 @@ import React from "react"
 import { Map } from "react-leaflet"
 
 export class FullScreenMap extends React.Component {
-    state = {
-        height: 500
-    }
+    state = {}
 
     componentDidMount() {
-        window.addEventListener("resize", this._updateDimensions)
-        this._updateDimensions()
+        if (typeof window !== 'undefined') {
+            window.addEventListener("resize", this._updateDimensions)
+            this._updateDimensions()
+        }
     }
 
     componentWillUnmount() {
-        window.removeEventListener("resize", this._updateDimensions)
+        if (typeof window !== 'undefined') {
+            window.removeEventListener("resize", this._updateDimensions)
+        }
     }
 
     _updateDimensions = () => {
-        const height = window.innerHeight
-        this.setState({ height: height })
+        if (typeof window !== 'undefined') {
+            const height = window.innerHeight
+            this.setState({ height: height })
+            this.forceUpdate()
+        }
     }
 
     render() {
         const { children, ...rest } = this.props
-        return (
-            <Map style={{ height: this.state.height }} { ...rest }>
-                { children }
-            </Map>
-        )
+        const height = this.state.height
+
+        if (typeof window !== 'undefined' && height) {
+            return (
+                <Map style={{ height }} { ...rest }>
+                    { children }
+                </Map>
+            )
+        } else {
+            return null
+        }
     }
 }
