@@ -2,13 +2,13 @@ import React from "react"
 import { Map } from "react-leaflet"
 
 export class FullScreenMap extends React.Component {
-
-    componentWillMount() {
-        this._updateDimensions()
+    state = {
+        height: 500
     }
 
     componentDidMount() {
         window.addEventListener("resize", this._updateDimensions)
+        this._updateDimensions()
     }
 
     componentWillUnmount() {
