@@ -12,7 +12,7 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
     "deploy": "yarn run clean && yarn run build --prefix-paths && gh-pages -d public",
     "process": "node scripts/parsing.js",
-    "clean": "rm -rf -- src/data/*/"
+    "clean": "rm -rf -- src/points"
   },
   "dependencies": {
     "gatsby": "^2.3.3",

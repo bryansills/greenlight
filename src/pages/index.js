@@ -9,23 +9,29 @@ export default ({ data }) => {
                 position={[41.881832, -87.623177]}
                 zoom={11}
                 options={data.obstructions.result}
-                points={data.points.result.points} />
+                points={data.points.file.result} />
         </div>
     )
 }
 
 export const query = graphql`
     query {
-        obstructions: file {
+        obstructions: file(
+            sourceInstanceName: { eq: "data" },
+            relativePath: { eq: "obstructions.json" }
+        ) {
             result: childrenObstructionsJson {
                 key,
                 spinner,
                 data
             }
         },
-        points: file(relativePath: { regex: "/all\/all/"}) {
-            result: childAllJson {
-                points: result
+        points: file(
+            sourceInstanceName: { eq: "points" },
+            relativePath: { eq: "all-all.json" }
+        ) {
+            file: childPointsJson {
+                result
             }
         }
     }
