@@ -1,14 +1,14 @@
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
     const { createNodeField } = actions
     if (node.internal.type === "CitiesJson") {
-        const slug = createFilePath({ node, getNode, basePath: "pages" })
+        const fileNode = getNode(node.parent)
+        const { name } = fileNode
         createNodeField({
             node,
-            name: "slug",
-            value: slug,
+            name: "key",
+            value: name,
         })
     }
 }
@@ -21,7 +21,7 @@ exports.createPages = ({ graphql, actions }) => {
                 edges {
                     node {
                         fields {
-                            slug
+                            key
                         }
                     }
                 }
@@ -29,11 +29,14 @@ exports.createPages = ({ graphql, actions }) => {
         }
     `).then(result => {
         result.data.allCitiesJson.edges.forEach(({ node }) => {
+            const { key } = node.fields
+
             createPage({
-                path: node.fields.slug,
+                path: key,
                 component: path.resolve("./src/templates/CityMap.js"),
                 context: {
-                    slug: node.fields.slug,
+                    cityKey: key,
+                    pointsPath: `${key}.json`
                 },
             })
         })

@@ -6,7 +6,7 @@ import { getGroupedPoints } from "../utils/process"
 export default ({ data }) => {
     const { cityConfig, obstructions, points } = data
     const { position, zoom } = cityConfig
-    
+
     return (
         <div id={"map"}>
             <ObstructionMap
@@ -19,8 +19,8 @@ export default ({ data }) => {
 }
 
 export const query = graphql`
-    query($slug: String!) {
-        cityConfig: citiesJson(fields: { slug: { eq: $slug } }) {
+    query($cityKey: String!, $pointsPath: String!) {
+        cityConfig: citiesJson(fields: { key: { eq: $cityKey } }) {
             name,
             position,
             zoom,
@@ -38,7 +38,7 @@ export const query = graphql`
         },
         points: file(
             sourceInstanceName: { eq: "points" },
-            relativePath: { eq: "all.json" }
+            relativePath: { eq: $pointsPath }
         ) {
             file: childPointsJson {
                 result {
