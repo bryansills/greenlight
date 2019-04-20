@@ -1,7 +1,6 @@
 // These are some tools to parse the .CSV files into something that the mapping tools can use
 const fs = require("fs")
 const path = require("path")
-const cities = require("../data/cities")
 const obstructions = require("../data/obstructions")
 
 const processText = (text) => {
@@ -65,16 +64,21 @@ const inputFilename = process.argv[2]
 const input = fs.readFileSync(path.resolve(".", inputFilename)).toString()
 const processedText = processText(input)
 
-cities.map(city => {
-    const { key, bounds } = city
-    const filtered = processedText.filter(({lat, long}) => {
-        if (bounds) {
-            const { min_lat, max_lat, min_long, max_long } = bounds
-            return min_lat < lat && lat < max_lat && min_long < long && long < max_long
-        } else {
-            return true
-        }
-    })
+fs.readdirSync(path.resolve(".", "src/data/cities"))
+    .filter(fileName => fileName.endsWith(".json"))
+    .forEach(fileName => {
+        const key = fileName.split(".")[0]
+        const cityFile = fs.readFileSync(path.resolve(".", "src/data/cities", fileName))
+        const cityConfig = JSON.parse(cityFile)
+        const { bounds } = cityConfig
+        const filteredPoints = processedText.filter(({lat, long}) => {
+            if (bounds) {
+                const { min_lat, max_lat, min_long, max_long } = bounds
+                return min_lat < lat && lat < max_lat && min_long < long && long < max_long
+            } else {
+                return true
+            }
+        })
 
-    outputFiles(key, filtered)
-})
+        outputFiles(key, filteredPoints)
+    })
