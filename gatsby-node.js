@@ -35,8 +35,7 @@ exports.createPages = ({ graphql, actions }) => {
                 path: key,
                 component: path.resolve("./src/templates/CityMap.js"),
                 context: {
-                    cityKey: key,
-                    pointsPath: `${key}.json`
+                    cityKey: key
                 },
             })
         })

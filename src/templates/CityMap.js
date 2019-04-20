@@ -19,7 +19,7 @@ export default ({ data }) => {
 }
 
 export const query = graphql`
-    query($cityKey: String!, $pointsPath: String!) {
+    query($cityKey: String!) {
         cityConfig: citiesJson(fields: { key: { eq: $cityKey } }) {
             name,
             position,
@@ -38,7 +38,7 @@ export const query = graphql`
         },
         points: file(
             sourceInstanceName: { eq: "points" },
-            relativePath: { eq: $pointsPath }
+            name: { eq: $cityKey }
         ) {
             file: childPointsJson {
                 result {
