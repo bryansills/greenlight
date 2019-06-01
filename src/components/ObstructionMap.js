@@ -24,16 +24,27 @@ export class ObstructionMap extends React.Component {
     }
 
     _onObstructionChange = (selectedOption) => this.setState({ selectedOption })
+
     _onDateRangeChange = (dateRange) => this.setState({ dateRange })
 
+    _getPoints = () => {
+        const { getGroupedPoints } = this.props
+        const { selectedOption, baseDate, dateRange } = this.state
+        const { min, max } = dateRange
+
+        const minDate = baseDate.clone().add(min, "days")
+        const maxDate = baseDate.clone().add(max, "days")
+
+        return getGroupedPoints(selectedOption, minDate, maxDate)
+    }
+
     render() {
-        const { position, zoom, options, getGroupedPoints } = this.props
+        const { position, zoom, options } = this.props
         const { selectedOption, baseDate, minDate, maxDate, dateRange } = this.state
-        const points = getGroupedPoints(selectedOption)
 
         return(
             <div>
-                <HeatMap position={position} zoom={zoom} points={points} />
+                <HeatMap position={position} zoom={zoom} points={this._getPoints()} />
                 <Filters
                     obstructions={options}
                     selectedObstruction={selectedOption}

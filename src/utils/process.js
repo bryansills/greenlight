@@ -1,7 +1,13 @@
-export const getGroupedPoints = (points) => (selectedOption) => {
+import moment from "moment"
+
+export const getGroupedPoints = (points) => (selectedOption, minDate, maxDate) => {
     const groupedMap = points
         .filter(({obstruction}) => {
             return obstruction === selectedOption || selectedOption === "all"
+        })
+        .filter(({timestamp}) => {
+            const timestampMoment = moment(timestamp)
+            return timestampMoment.isBetween(minDate, maxDate, "day", "[]")
         })
         .reduce((acc, {lat, long}) => {
             const key = `${lat},${long}`

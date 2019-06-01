@@ -44,7 +44,8 @@ export const query = graphql`
                 result {
                     lat,
                     long,
-                    obstruction
+                    obstruction,
+                    timestamp
                 }
             }
         }

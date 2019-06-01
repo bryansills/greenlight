@@ -27,13 +27,15 @@ const processText = (text) => {
                 const obstruction = parts[2]
                 const lat = parseFloat(parts[3].replace("\"", "").trim())
                 const long = parseFloat(parts[4].replace("\"", "").trim())
+                const timestamp = parts[5]
 
                 return [
                     "",
                     obstruction,
                     lat,
                     long,
-                    ...new Array(28).fill("")
+                    timestamp,
+                    ...new Array(27).fill("")
                 ].join(",")
             } else if (line) {
                 console.log(`Unexpected data on line ${index + 1}: has ${parts.length} sections instead of 33`)

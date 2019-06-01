@@ -2,6 +2,7 @@
 const fs = require("fs")
 const path = require("path")
 const obstructions = require("../data/obstructions")
+const moment = require("moment")
 
 const processText = (text) => {
     const lines = text.split("\n")
@@ -27,11 +28,13 @@ const processText = (text) => {
                 const obstruction = getObstructionKey(parts[2])
                 const lat = parseFloat(parts[3].replace("\"", "").trim())
                 const long = parseFloat(parts[4].replace("\"", "").trim())
+                const timestamp = moment(parts[5], "M/D/YYYY h:mma").toISOString()
 
                 return {
                     lat,
                     long,
                     obstruction,
+                    timestamp,
                 }
             } else if (line) {
                 console.log(`Unexpected data on line ${index + 1}: has ${parts.length} sections instead of 33`)
