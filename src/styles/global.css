@@ -3,5 +3,9 @@ html, body {
 }
 
 .input-range {
-    margin-top: 20px;
+    margin-top: 32px;
+}
+
+.input-range__label {
+    font-size: 0.6rem;
 }

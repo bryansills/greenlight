@@ -1,0 +1,16 @@
+.filters_positioning {
+    position: absolute;
+    top: 10px;
+    left: 80px;
+    right: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    z-index: 1000;
+}
+
+.filters_container {
+    background-color: #ffffff;
+    padding: 16px 32px 32px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+}

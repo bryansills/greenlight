@@ -1,18 +1,19 @@
 import React from "react"
 import { HeatMap } from "../components/HeatMap"
-import { Dropdown } from "./Dropdown"
+import { Filters } from "./Filters"
 import moment from "moment"
 
 export class ObstructionMap extends React.Component {
     constructor(props) {
         super(props)
 
-        const startDate = moment("2017-08-29")
+        const baseDate = moment("2017-08-29")
         const currentDate = moment()
-        const rangeDiff = currentDate.diff(startDate, "days")
+        const rangeDiff = currentDate.diff(baseDate, "days")
 
         this.state = {
             selectedOption: props.options[0].key,
+            baseDate,
             minDate: 0,
             maxDate: rangeDiff,
             dateRange: {
@@ -22,21 +23,22 @@ export class ObstructionMap extends React.Component {
         }
     }
 
-    _onChangeObstruction = (selectedOption) => this.setState({ selectedOption })
+    _onObstructionChange = (selectedOption) => this.setState({ selectedOption })
     _onDateRangeChange = (dateRange) => this.setState({ dateRange })
 
     render() {
         const { position, zoom, options, getGroupedPoints } = this.props
-        const { selectedOption, minDate, maxDate, dateRange } = this.state
+        const { selectedOption, baseDate, minDate, maxDate, dateRange } = this.state
         const points = getGroupedPoints(selectedOption)
 
         return(
             <div>
                 <HeatMap position={position} zoom={zoom} points={points} />
-                <Dropdown
-                    options={options}
-                    selectedOption={selectedOption}
-                    onChange={this._onChangeObstruction}
+                <Filters
+                    obstructions={options}
+                    selectedObstruction={selectedOption}
+                    onObstructionChange={this._onObstructionChange}
+                    baseDate={baseDate}
                     minDate={minDate}
                     maxDate={maxDate}
                     dateRange={dateRange}
