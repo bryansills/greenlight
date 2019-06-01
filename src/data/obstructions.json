@@ -4,33 +4,33 @@
         "spinner": "All"
     },
     {
-        "key": "company",
-        "data": "Company Vehicle",
-        "spinner": "Company Vehicle"
+        "key": "alpha",
+        "data": "ALPHA",
+        "spinner": "AlPhA"
     },
     {
-        "key": "taxi_rideshare",
-        "data": "Taxi / Uber / Livery / Lyft",
-        "spinner": "Taxi / Uber / Lyft / Livery"
+        "key": "beta",
+        "data": "BETA",
+        "spinner": "BeTa"
     },
     {
-        "key": "private_owner",
-        "data": "Private Owner Vehicle",
-        "spinner": "Private Owner Vehicle"
+        "key": "charlie",
+        "data": "CHARLIE",
+        "spinner": "ChArLiE"
     },
     {
-        "key": "municipal",
-        "data": "Municipal (city) Vehicle - includes USPS",
-        "spinner": "Municipal Vehicle"
+        "key": "delta",
+        "data": "DELTA",
+        "spinner": "DeLtA"
     },
     {
-        "key": "construction",
-        "data": "Construction",
-        "spinner": "Construction"
+        "key": "echo",
+        "data": "ECHO",
+        "spinner": "EcHo"
     },
     {
-        "key": "other",
-        "data": "\"\"\"Other  (damaged lane, snow, debris, pedestrian, etc.)\"\"\"",
-        "spinner": "Other"
+        "key": "foxtrot",
+        "data": "FOXTROT",
+        "spinner": "FoXtRoT"
     }
 ]
