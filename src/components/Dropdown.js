@@ -1,4 +1,6 @@
 import React from "react"
+import InputRange from 'react-input-range'
+import "react-input-range/lib/css/index.css"
 import dropdownStyles from "./dropdown.module.css"
 
 export class Dropdown extends React.Component {
@@ -19,13 +21,20 @@ export class Dropdown extends React.Component {
     }
 
     render() {
-        const { selectedOption } = this.props
+        const { selectedOption, minDate, maxDate, dateRange, onDateRangeChange } = this.props
 
         return(
             <div className={dropdownStyles.spinner_container}>
-                <select value={selectedOption} onChange={this._onChange}>
-                    { this._renderOptions() }
-                </select>
+                <div>
+                    <select value={selectedOption} onChange={this._onChange}>
+                        { this._renderOptions() }
+                    </select>
+                    <InputRange
+                        minValue={minDate}
+                        maxValue={maxDate}
+                        value={dateRange}
+                        onChange={onDateRangeChange} />
+                </div>
             </div>
         )
     }
