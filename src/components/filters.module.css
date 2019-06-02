@@ -8,9 +8,13 @@
     z-index: 1000;
 }
 
-.filters_container {
-    background-color: #ffffff;
+.filters_fill {
     padding: 16px 32px 32px;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+
+.filters_border {
     border: 2px solid rgba(0,0,0,0.2);
     border-radius: 4px;
 }

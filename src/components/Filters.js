@@ -37,16 +37,18 @@ export class Filters extends React.Component {
 
         return(
             <div className={styles.filters_positioning}>
-                <div className={styles.filters_container}>
-                    <select value={selectedObstruction} onChange={this._onChange}>
-                        { this._renderOptions() }
-                    </select>
-                    <InputRange
-                        minValue={minDate}
-                        maxValue={maxDate}
-                        value={dateRange}
-                        formatLabel={this._formatLabel}
-                        onChange={onDateRangeChange} />
+                <div className={styles.filters_border}>
+                    <div className={styles.filters_fill}>
+                        <select value={selectedObstruction} onChange={this._onChange}>
+                            { this._renderOptions() }
+                        </select>
+                        <InputRange
+                            minValue={minDate}
+                            maxValue={maxDate}
+                            value={dateRange}
+                            formatLabel={this._formatLabel}
+                            onChange={onDateRangeChange} />
+                    </div>
                 </div>
             </div>
         )
